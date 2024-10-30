@@ -27,8 +27,4 @@
     <ProjectReference Include="..\DonaCinema.BusinessObject\DonaCinema.BusinessObject.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interface\" />
-  </ItemGroup>
-
 </Project>

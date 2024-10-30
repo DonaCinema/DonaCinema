@@ -20,7 +20,6 @@ namespace DonaCinema.API.Controllers
         public async Task<IActionResult> SeedRoles()
         {
             var seedRoles = await _authService.SeedRolesAsync();
-
             return Ok(seedRoles);
         }
     }

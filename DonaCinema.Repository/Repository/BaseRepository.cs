@@ -70,6 +70,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public async Task AddAsync(TEntity entity)
     {
         await DbSet.AddAsync(entity);
+        await _dbContext.SaveChangesAsync();
     }
 
     public void AddRange(IEnumerable<TEntity> entities)

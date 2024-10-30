@@ -1,4 +1,5 @@
 ﻿using DonaCinema.Repository.Context;
+using DonaCinema.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,6 @@ public class UnitOfWork : BaseUnitOfWork<ApplicationDbContext>, IUnitOfWork
     {
     }
     /*public IUserRepository UserRepository => GetRepository<IUserRepository>();*/
-    
+    public IMovieRepository MovieRepository => GetRepository<IMovieRepository>();
 }
 
