@@ -55,11 +55,11 @@ namespace DonaCinema.Service.Service
 
         private Movie MapToMovie(MovieRequestModel model)
         {
-            var currUser = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var currUserName = _contextAccessor.HttpContext?.User.Identity.Name;
+            var currUser = _contextAccessor.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier).Value ?? "1";
+            var currUserName = _contextAccessor.HttpContext?.User.Identity.Name ?? "Admin" ;
             return new Movie
             {
-                Cast = model.Cast,
+                Cast = model.Cast,  
                 Language = model.Language,
                 AgeRating = model.AgeRating,
                 Title = model.Title,

@@ -1,5 +1,8 @@
 using DonaCinema.BusinessObject.Entity;
 using DonaCinema.Repository.Context;
+using DonaCinema.Repository.Interface;
+using DonaCinema.Repository.Repository;
+using DonaCinema.Repository.UnitOfWork;
 using DonaCinema.Service.Interface;
 using DonaCinema.Service.Service;
 using Microsoft.AspNetCore.Identity;
@@ -10,9 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 #region Config DbContext
 var connectionString = builder.Configuration.GetConnectionString("local");
-    // Use MySQL in development
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+// Use PostgreSQL in development
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(connectionString));
 #endregion
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -29,10 +32,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
